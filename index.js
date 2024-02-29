@@ -1,29 +1,30 @@
-var http = require("http");
-var fs= require("fs");
+const express= require("express");
+const app= express();
 
-var server = http.createServer((req,res)=>{
-    if(req.url=="/"){
-        fs.readFile("index.html", (err,html)=>{
-            res.write(html);
-            res.end(); 
-        });
-        
-    }else if(req.url=="/products"){
-        fs.readFile("urunler.html", (err,html)=>{
-            res.write(html);
-            res.end(); 
-        });
+app.set("view engine", "ejs");
 
-    }else{
-        fs.readFile("404.html", (err,html)=>{
-            res.write(html);
-            res.end(); 
-        });
-    }
+const data= [
+    {id:1, name:"iphone 14", price:3000},
+    {id:2, name:"iphone 15", price:4000},
+    {id:3, name:"iphone 13", price:5000}
 
-    
+];
+
+// routes
+app.use("/products/:id",function(req,res){
+    res.render("urun_details");
 });
 
-server.listen(3000, ()=>{
-    console.log("calışıyo");
-})
+app.use("/products",function(req,res){
+    res.render("urunler", {
+        liste: data
+    });
+});
+
+app.use("/",function(req,res){
+    res.render("index");
+});
+
+app.listen(3000,()=>{
+    console.log("listening on port 3000");
+});
