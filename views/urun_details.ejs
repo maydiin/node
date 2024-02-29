@@ -4,12 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Document</title>
 </head>
 
-<body>
-    <h1>urun detay
+<body class="bg-warning">
+    <h1>
+        <%= name %>
     </h1>
+    <img src="/foto/<%= imageUrl %>" alt="" width="200">
+    <p>fiyat: <%= price %>
+    </p>
 </body>
 
 </html>
